@@ -103,5 +103,5 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/demonygong/demonygong.github.io
-  branch: gh-pages
-  # branch: master
+  # branch: gh-pages
+  branch: master
