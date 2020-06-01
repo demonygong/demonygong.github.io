@@ -9,6 +9,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       return GUEST.includes(item);
     });
     new Valine({
+      enableQQ: true,
+      boolean: true,
       el         : '#valine-comments',
       verify     : {{ theme.valine.verify }},
       notify     : {{ theme.valine.notify }},
@@ -22,7 +24,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       lang       : '{{ theme.valine.language }}' || 'zh-cn',
       path       : location.pathname,
       recordIP   : {{ theme.valine.recordIP }},
-      serverURLs : '{{ theme.valine.serverURLs }}'
+      serverURLs : '{{ theme.valine.serverURLs }}',
+      requiredFields: ['nick'],
     });
   }, window.Valine);
 });
