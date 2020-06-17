@@ -7,8 +7,8 @@ tags:
 - iview按钮操作
 ---
 
-#### 起因
-&ensp;&ensp;&ensp;&ensp;最近接触的iview的项目较多，使用起来也较容易上手。只是有一点 ，部分需要操作更改的显示只能放在render中修改，少数还好，一旦多了会显得columns里代码很繁琐。
+
+&ensp;&ensp;&ensp;&ensp;最近接触的iview的项目较多，iview使用起来也较容易上手。只是有一点 ，表格中部分需要操作更改的显示只能放在render中修改，少数还好，一旦多了会显得columns里代码很繁琐。
 <!--more-->
 &ensp;&ensp;&ensp;&ensp;一旦复杂程度多一点，data中就会显示很多代码，而实际在data返回中一般是不需要逻辑操作的（个人认为），所以视情况封装。
 &ensp;&ensp;&ensp;&ensp;以下是针对操作按钮的，比如需要在table中显示编辑、删除等。
