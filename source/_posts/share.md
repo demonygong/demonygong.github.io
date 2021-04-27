@@ -6,10 +6,9 @@ tags:
 - 保存图片
 categories:
 - uniapp
-- 微信小程序
 ---
 
-&ensp;&ensp;&ensp;&ensp;使用uniapp制作微信小程序（记载回顾）
+&ensp;&ensp;&ensp;&ensp;使用uniapp制作微信小程序、或app（记载回顾）
 * 海报（后台生成）分享
 * 保存图片到本地
 <!--more-->

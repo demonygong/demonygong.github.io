@@ -2,9 +2,9 @@
 title: iview表格操作类封装
 date: 2020-06-15 17:42:25
 categories:
-- iview
+- Vue
 tags:
-- iview按钮操作
+- iview
 ---
 
 
