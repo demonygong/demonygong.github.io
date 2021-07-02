@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>前端代码规范</title>
+      <link href="/2021/07/02/%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/"/>
+      <url>/2021/07/02/%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</url>
+      
+        <content type="html"><![CDATA[<p>前端开发有很多痛苦，也有很多乐趣，自己要学习的地方还有很多，得跟随潮流保持学习状态不断更新自己的技术栈，根据之前看过的文章和自己平时遇到的总结了下前端规范，时刻提醒自己注意代码规范。（VUE）</p><a id="more"></a><h3 id="vsCode"><a href="#vsCode" class="headerlink" title="vsCode"></a>vsCode</h3><ul><li>轻量级界面美观，调试方便，代码自动格式化</li></ul><h3 id="组件规范"><a href="#组件规范" class="headerlink" title="组件规范"></a>组件规范</h3><ul><li>多个单词组合，驼峰式命名，避免与html冲突<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">forExample.vue</span><br><span class="line"></span><br><span class="line">components: &#123;</span><br><span class="line">  forExample</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 调用</span><br><span class="line">&lt;for-example&gt;&lt;&#x2F;for-example&gt;</span><br></pre></td></tr></table></figure></li><li>公共组件（多个调用）放置于外层components</li><li>单个复杂文件，可在该文件下创建子组件</li><li>和父组件紧密契合的子组件以父组件名为前缀名</li><li>Props定义应该尽量详细<ol><li>命名：驼峰命名</li><li>必须指定类型</li><li>加上require或者 default，两者二选一</li><li>加上注释，表明其含义</li><li>如果业务需要，加上 validator验证<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line"> &#x2F;&#x2F; 部门id</span><br><span class="line"> deptId: &#123;</span><br><span class="line">  type: String,</span><br><span class="line">  required: false,</span><br><span class="line">  default: () &#x3D;&gt; null</span><br><span class="line"> &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 数组形式  确保对应，无默认值等</span><br><span class="line">props: [&#39;deptId&#39;]</span><br></pre></td></tr></table></figure></li></ol></li></ul><h3 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h3><ul><li>放入assets中</li><li>img、js等分类</li></ul><h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><ul><li>样式使用 scoped 特性</li><li>v-for 应该避免与 v-if 在同一个元素上使用，因为 v-for 的优先级比 v-if 更高，为了避免无效计算和渲染，应该尽量将 v-if 放到容器的父元素之上</li><li>vue中v-for带上 key 值使更新 DOM 时渲染效率更高</li><li>vue中v-for为什么不能用index作为key<ol><li>更新DOM的时候会出现性能问题</li><li>会发生一些状态bug</li></ol></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 规范 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>scss与less</title>
       <link href="/2021/04/29/scss%E4%B8%8Eless/"/>
       <url>/2021/04/29/scss%E4%B8%8Eless/</url>
