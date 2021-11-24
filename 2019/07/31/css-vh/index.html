@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/1.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/1.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/1.jpg">
+  <link rel="mask-icon" href="/img/1.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.demonygong.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="css中height 100vh的应用场景，动态高度百分比布局，浏览器视区大小单位 height:100vh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css_vh">
+<meta property="og:url" content="http://github.demonygong.io/2019/07/31/css-vh/index.html">
+<meta property="og:site_name" content="mofeng">
+<meta property="og:description" content="css中height 100vh的应用场景，动态高度百分比布局，浏览器视区大小单位 height:100vh">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-31T07:30:02.000Z">
+<meta property="article:modified_time" content="2021-11-24T09:38:11.640Z">
+<meta property="article:author" content="陌上檀香">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://github.demonygong.io/2019/07/31/css-vh/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>css_vh | mofeng</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a href="https://github.com/demonygong" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">mofeng</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://github.demonygong.io/2019/07/31/css-vh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/1.jpg">
+      <meta itemprop="name" content="陌上檀香">
+      <meta itemprop="description" content="一程烟雨，然后，一段过往。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mofeng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          css_vh
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-31 15:30:02" itemprop="dateCreated datePublished" datetime="2019-07-31T15:30:02+08:00">2019-07-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-24 17:38:11" itemprop="dateModified" datetime="2021-11-24T17:38:11+08:00">2021-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/07/31/css-vh/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/31/css-vh/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>css中height 100vh的应用场景，动态高度百分比布局，浏览器视区大小单位</p>
+<pre><code>height:100vh</code></pre><a id="more"></a>
+<h4 id="一些只能vw-vh才能完成的应用场景："><a href="#一些只能vw-vh才能完成的应用场景：" class="headerlink" title="一些只能vw, vh才能完成的应用场景："></a>一些只能vw, vh才能完成的应用场景：</h4><h5 id="场景之：元素的尺寸限制"><a href="#场景之：元素的尺寸限制" class="headerlink" title="场景之：元素的尺寸限制"></a>场景之：元素的尺寸限制</h5><p>vw vh 主要是实现了动态高度百分比布局，比如宽高比不固定的图片，vw很轻易的实现正方形图片缩略图<br>原始大图的尺寸限制问题——因为很有可能图片过大，尼玛一屏显示器区域不够放，我们需要对其进行缩放处理。<br>这类限制的实现，在当下，需要获得图片的原始大小，以及浏览器内部尺寸，算大小，算比例等，算是比较折腾的。<br>但是，vw, vh等单位本身就是浏览器视区大小相关单位，直接使用其做限制，岂不省了N多JS代码？<br>CSS代码：<br>.vw_vh_img {<br>max-width: 90vw;<br>max-height: 90%;<br>max-height: 90vh;<br>}</p>
+<h5 id="CSS3新vw-vh单位与纯CSS定位的弹框屏幕居中效果实例页面"><a href="#CSS3新vw-vh单位与纯CSS定位的弹框屏幕居中效果实例页面" class="headerlink" title="CSS3新vw, vh单位与纯CSS定位的弹框屏幕居中效果实例页面"></a>CSS3新vw, vh单位与纯CSS定位的弹框屏幕居中效果实例页面</h5><h5 id="视区覆盖以及边界定位"><a href="#视区覆盖以及边界定位" class="headerlink" title="视区覆盖以及边界定位"></a>视区覆盖以及边界定位</h5><p>vh确实是相对于屏幕的，但默认body有一个margin，100%加上这个margin就超出了就会出现滚动条。清除body的margin即可。<br>body{margin:0;}</p>
+<h4 id="在做手机端的时候经常会用到的做字体的尺寸单位"><a href="#在做手机端的时候经常会用到的做字体的尺寸单位" class="headerlink" title="在做手机端的时候经常会用到的做字体的尺寸单位"></a>在做手机端的时候经常会用到的做字体的尺寸单位</h4><h5 id="em"><a href="#em" class="headerlink" title="em"></a>em</h5><p>说白了 em就相当于“倍”，比如设置当前的div的字体大小为1.5em，则当前的div的字体大小为：当前div继承的字体大小*1.5<br>但是当div进行嵌套的时候，em始终是按照当前div继承的字体大小来缩放，参照后面的例子。</p>
+<h5 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h5><p>这里的r就是root的意思，意思是相对于根节点来进行缩放，当有嵌套关系的时候，嵌套关系的元素的字体大小始终按照根节点的字体大小进行缩放。<br>参照后面给的demo</p>
+<h5 id="vh"><a href="#vh" class="headerlink" title="vh"></a>vh</h5><p>vh就是当前屏幕可见高度的1%，也就是说<br>height:100vh == height:100%;<br>但是有个好处是当元素没有内容时候，设置height:100%该元素不会被撑开，<br>但是设置height:100vh，该元素会被撑开屏幕高度一致。</p>
+<h5 id="vw"><a href="#vw" class="headerlink" title="vw"></a>vw</h5><p>vw就是当前屏幕宽度的1%<br>补充一句，当设置width:100%，被设置元素的宽度是按照父元素的宽度来设置，<br>但是100vw是相对于屏幕可见宽度来设置的，所以会出现50vw 比50%大的情况</p>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;Zh-cn&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;一程烟雨&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot; media&#x3D;&quot;screen&quot;&gt;</span><br><span class="line">html&#123;</span><br><span class="line">font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line">.em,</span><br><span class="line">.em &gt; .em-son,</span><br><span class="line">.em &gt; .em-son &gt; .em-grandson &#123;</span><br><span class="line">font-size: 1.2em;</span><br><span class="line">&#125;</span><br><span class="line">.rem,</span><br><span class="line">.rem &gt; .rem-son,</span><br><span class="line">.rem &gt; .rem-son &gt; .rem-grandson &#123;</span><br><span class="line">font-size: 1.2rem;</span><br><span class="line">&#125;</span><br><span class="line">.rem-box &#123;</span><br><span class="line">background: #d60b3b;</span><br><span class="line">width:10rem;</span><br><span class="line">height: 10rem;</span><br><span class="line">color: #fff;</span><br><span class="line">text-align: center;</span><br><span class="line">line-height:5rem;</span><br><span class="line">&#125;</span><br><span class="line">.vhvw-box &#123;</span><br><span class="line">background: #d60b3b;</span><br><span class="line">width:50vw;</span><br><span class="line">height: 50vh;</span><br><span class="line">color: #fff;</span><br><span class="line">text-align: center;</span><br><span class="line">line-height:25vh;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;em 继承父元素的字体大小，来变大或变小，多层嵌套字体变化&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;em&quot;&gt;</span><br><span class="line">字体大小 1.2 * 14（父元素body） &#x3D; 16px</span><br><span class="line">&lt;div class&#x3D;&quot;em-son&quot;&gt;</span><br><span class="line">字体大小 1.2 * 16(父元素em) &#x3D; 20px</span><br><span class="line">&lt;div class&#x3D;&quot;em-grandson&quot;&gt;</span><br><span class="line">字体大小 1.2 * 20(父元素em-son) &#x3D; 24px</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;h1&gt;rem 继承根节点元素的字体大小，来变大或变小，多层嵌套字体不变化&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;rem&quot;&gt;</span><br><span class="line">字体大小 1.2 * 14（根节点html） &#x3D; 16px</span><br><span class="line">&lt;div class&#x3D;&quot;rem-son&quot;&gt;</span><br><span class="line">字体大小 1.2 * 14（根节点html） &#x3D; 16px</span><br><span class="line">&lt;div class&#x3D;&quot;rem-grandson&quot;&gt;</span><br><span class="line">字体大小 1.2 * 14（根节点html） &#x3D; 16px</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;h1&gt;rem 也可作为固定长度单位设置宽高等&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;rem-box&quot;&gt;</span><br><span class="line">宽：14 * 10 &#x3D; 140px&lt;br&gt;</span><br><span class="line">高：14 * 10 &#x3D; 140px</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;h1&gt;vh,vw 屏幕可见区域的高度，宽度的1%&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;vhvw-box&quot;&gt;</span><br><span class="line">宽：屏幕宽度的50%&lt;br&gt;</span><br><span class="line">高：屏幕高度的50%</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;Zh-cn&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;一程烟雨&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot; media&#x3D;&quot;screen&quot;&gt;</span><br><span class="line">html&#123;</span><br><span class="line">font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line">.em,</span><br><span class="line">.em &gt; .em-son,</span><br><span class="line">.em &gt; .em-son &gt; .em-grandson &#123;</span><br><span class="line">font-size: 1.2em;</span><br><span class="line">&#125;</span><br><span class="line">.rem,</span><br><span class="line">.rem &gt; .rem-son,</span><br><span class="line">.rem &gt; .rem-son &gt; .rem-grandson &#123;</span><br><span class="line">font-size: 1.2rem;</span><br><span class="line">&#125;</span><br><span class="line">.rem-box &#123;</span><br><span class="line">background: #d60b3b;</span><br><span class="line">width:10rem;</span><br><span class="line">height: 10rem;</span><br><span class="line">color: #fff;</span><br><span class="line">text-align: center;</span><br><span class="line">line-height:5rem;</span><br><span class="line">&#125;</span><br><span class="line">.vhvw-box &#123;</span><br><span class="line">background: #d60b3b;</span><br><span class="line">width:50vw;</span><br><span class="line">height: 50vh;</span><br><span class="line">color: #fff;</span><br><span class="line">text-align: center;</span><br><span class="line">line-height:25vh;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;em 继承父元素的字体大小，来变大或变小，多层嵌套字体变化&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;em&quot;&gt;</span><br><span class="line">字体大小 1.2 * 14（父元素body） &#x3D; 16px</span><br><span class="line">&lt;div class&#x3D;&quot;em-son&quot;&gt;</span><br><span class="line">字体大小 1.2 * 16(父元素em) &#x3D; 20px</span><br><span class="line">&lt;div class&#x3D;&quot;em-grandson&quot;&gt;</span><br><span class="line">字体大小 1.2 * 20(父元素em-son) &#x3D; 24px</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;h1&gt;rem 继承根节点元素的字体大小，来变大或变小，多层嵌套字体不变化&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;rem&quot;&gt;</span><br><span class="line">字体大小 1.2 * 14（根节点html） &#x3D; 16px</span><br><span class="line">&lt;div class&#x3D;&quot;rem-son&quot;&gt;</span><br><span class="line">字体大小 1.2 * 14（根节点html） &#x3D; 16px</span><br><span class="line">&lt;div class&#x3D;&quot;rem-grandson&quot;&gt;</span><br><span class="line">字体大小 1.2 * 14（根节点html） &#x3D; 16px</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;h1&gt;rem 也可作为固定长度单位设置宽高等&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;rem-box&quot;&gt;</span><br><span class="line">宽：14 * 10 &#x3D; 140px&lt;br&gt;</span><br><span class="line">高：14 * 10 &#x3D; 140px</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;h1&gt;vh,vw 屏幕可见区域的高度，宽度的1%&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;vhvw-box&quot;&gt;</span><br><span class="line">宽：屏幕宽度的50%&lt;br&gt;</span><br><span class="line">高：屏幕高度的50%</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+    </div>
+    <div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>快乐阅读-------------</div>
+    
+</div>
+        
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/css/" rel="tag"><i class="fa fa-tag"></i> css</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/26/hello-world/" rel="prev" title="Linux命令操作">
+      <i class="fa fa-chevron-left"></i> Linux命令操作
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/05/created-%E4%B8%8Emounted-/" rel="next" title="created()与mounted()">
+      created()与mounted() <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些只能vw-vh才能完成的应用场景："><span class="nav-number">1.</span> <span class="nav-text">一些只能vw, vh才能完成的应用场景：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#场景之：元素的尺寸限制"><span class="nav-number">1.1.</span> <span class="nav-text">场景之：元素的尺寸限制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CSS3新vw-vh单位与纯CSS定位的弹框屏幕居中效果实例页面"><span class="nav-number">1.2.</span> <span class="nav-text">CSS3新vw, vh单位与纯CSS定位的弹框屏幕居中效果实例页面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#视区覆盖以及边界定位"><span class="nav-number">1.3.</span> <span class="nav-text">视区覆盖以及边界定位</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在做手机端的时候经常会用到的做字体的尺寸单位"><span class="nav-number">2.</span> <span class="nav-text">在做手机端的时候经常会用到的做字体的尺寸单位</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#em"><span class="nav-number">2.1.</span> <span class="nav-text">em</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rem"><span class="nav-number">2.2.</span> <span class="nav-text">rem</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#vh"><span class="nav-number">2.3.</span> <span class="nav-text">vh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#vw"><span class="nav-number">2.4.</span> <span class="nav-text">vw</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码示例"><span class="nav-number">3.</span> <span class="nav-text">代码示例</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="陌上檀香"
+      src="/img/1.jpg">
+  <p class="site-author-name" itemprop="name">陌上檀香</p>
+  <div class="site-description" itemprop="description">一程烟雨，然后，一段过往。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zcheng.site/" title="https:&#x2F;&#x2F;zcheng.site&#x2F;" rel="noopener" target="_blank">zcheng</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mhyu.top/" title="https:&#x2F;&#x2F;mhyu.top&#x2F;" rel="noopener" target="_blank">mhyu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lxwu.me/" title="https:&#x2F;&#x2F;lxwu.me&#x2F;" rel="noopener" target="_blank">lxwu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陌上檀香</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">27 分钟</span>
+</div>
+
+<div>风清月明，山水之上，雅致静赏！</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      enableQQ: true,
+      boolean: true,
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'KNuhK7ejnhppSgTa2X4MqfUh-gzGzoHsz',
+      appKey     : '8JQqThzDSQgz0lYwC7f5Pu3h',
+      placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！(昵称输入QQ号自动识别昵称和头像哦)",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : '',
+      
+    });
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
