@@ -37,22 +37,23 @@
     var CONFIG = {"hostname":"github.demonygong.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="iView 是一套基于 Vue.js 的 UI 组件库，主要服务于 PC 界面的中后台产品。  高质量、功能丰富； 友好的 API ，自由灵活地使用空间； 使用单文件的 Vue 组件化开发模式。">
+  <meta name="description" content="JS 单线程语言：指的是 javascript 引擎（如V8）在同一时刻只能处理一个任务；事件循环唯一，可有多个队列任务。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iview基础对接">
-<meta property="og:url" content="http://github.demonygong.io/2019/10/31/iview%E5%AF%B9%E6%8E%A5/index.html">
+<meta property="og:title" content="js事件循环">
+<meta property="og:url" content="http://github.demonygong.io/2021/12/27/js%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/index.html">
 <meta property="og:site_name" content="mofeng">
-<meta property="og:description" content="iView 是一套基于 Vue.js 的 UI 组件库，主要服务于 PC 界面的中后台产品。  高质量、功能丰富； 友好的 API ，自由灵活地使用空间； 使用单文件的 Vue 组件化开发模式。">
+<meta property="og:description" content="JS 单线程语言：指的是 javascript 引擎（如V8）在同一时刻只能处理一个任务；事件循环唯一，可有多个队列任务。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://github.demonygong.io/img/iview.png">
-<meta property="article:published_time" content="2019-10-31T02:52:46.000Z">
-<meta property="article:modified_time" content="2021-11-24T09:38:11.641Z">
+<meta property="og:image" content="http://github.demonygong.io/img/event-loop/loop1.png">
+<meta property="og:image" content="http://github.demonygong.io/img/event-loop/loop2.png">
+<meta property="article:published_time" content="2021-12-27T03:11:32.000Z">
+<meta property="article:modified_time" content="2021-12-27T06:14:19.610Z">
 <meta property="article:author" content="陌上檀香">
-<meta property="article:tag" content="iview">
+<meta property="article:tag" content="事件循环">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://github.demonygong.io/img/iview.png">
+<meta name="twitter:image" content="http://github.demonygong.io/img/event-loop/loop1.png">
 
-<link rel="canonical" href="http://github.demonygong.io/2019/10/31/iview%E5%AF%B9%E6%8E%A5/">
+<link rel="canonical" href="http://github.demonygong.io/2021/12/27/js%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">
 
 
 <script id="page-configurations">
@@ -65,7 +66,7 @@
   };
 </script>
 
-  <title>iview基础对接 | mofeng</title>
+  <title>js事件循环 | mofeng</title>
   
 
 
@@ -215,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://github.demonygong.io/2019/10/31/iview%E5%AF%B9%E6%8E%A5/">
+    <link itemprop="mainEntityOfPage" href="http://github.demonygong.io/2021/12/27/js%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/1.jpg">
@@ -228,7 +229,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          iview基础对接
+          js事件循环
         </h1>
 
         <div class="post-meta">
@@ -237,23 +238,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-10-31 10:52:46" itemprop="dateCreated datePublished" datetime="2019-10-31T10:52:46+08:00">2019-10-31</time>
+              <time title="创建时间：2021-12-27 11:11:32 / 修改时间：14:14:19" itemprop="dateCreated datePublished" datetime="2021-12-27T11:11:32+08:00">2021-12-27</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-24 17:38:11" itemprop="dateModified" datetime="2021-11-24T17:38:11+08:00">2021-11-24</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                  <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">js</span></a>
                 </span>
             </span>
 
@@ -266,8 +261,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/10/31/iview%E5%AF%B9%E6%8E%A5/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/31/iview%E5%AF%B9%E6%8E%A5/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/12/27/js%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/12/27/js%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -277,14 +272,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -296,25 +291,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>iView 是一套基于 Vue.js 的 UI 组件库，主要服务于 PC 界面的中后台产品。</p>
+        <p>JS 单线程语言：指的是 javascript 引擎（如V8）在同一时刻只能处理一个任务；<br>事件循环唯一，可有多个队列任务。</p>
+<a id="more"></a>
+<h4 id="任务队列-Event-Queue"><a href="#任务队列-Event-Queue" class="headerlink" title="任务队列( Event Queue )"></a>任务队列( Event Queue )</h4><blockquote>
+<p>所有的任务可以分为同步任务和异步任务，同步任务，顾名思义，就是立即执行的任务，同步任务一般会直接进入到主线程中执行；而异步任务，就是异步执行的任务，比如ajax网络请求，setTimeout 定时函数等都属于异步任务，异步任务会通过任务队列的机制(先进先出的机制)来进行协调。</p>
+</blockquote>
+<h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p><strong>同步和异步任务分别进入不同的执行环境，同步的进入主线程，即主执行栈，异步的进入任务队列。主线程内的任务执行完毕为空，会去任务队列读取对应的任务，推入主线程执行。 上述过程的不断重复就是我们说的 Event Loop (事件循环)。</strong><br><img src="/img/event-loop/loop1.png" alt="事件循环"></p>
+<p>在事件循环中，每进行一次循环操作称为tick，每一次 tick 的任务处理模型是比较复杂的，其关键的步骤可以总结如下：</p>
+<ol>
+<li>执行一个宏任务（栈中没有就从事件队列中获取）</li>
+<li>执行过程中如果遇到微任务，就将它添加到微任务的任务队列中</li>
+<li>宏任务执行完毕后，立即执行当前微任务队列中的所有微任务（依次执行）</li>
+<li>当前宏任务执行完毕，开始检查渲染，然后GUI线程接管渲染/(render渲染)</li>
+<li>渲染完毕后，JS线程继续接管，开始下一个宏任务（从事件队列中获取）<br><img src="/img/event-loop/loop2.png" alt="tick"></li>
+</ol>
+<p><strong>宏任务主要包含：script( 整体代码)、setTimeout、setInterval、I/O、UI 交互事件、setImmediate(Node.js 环境)</strong><br><strong>微任务主要包含：Promise、MutaionObserver、process.nextTick(Node.js 环境)</strong></p>
+<p>另外：</p>
 <ul>
-<li>高质量、功能丰富；</li>
-<li>友好的 API ，自由灵活地使用空间；</li>
-<li>使用单文件的 Vue 组件化开发模式。<a id="more"></a>
-
-</li>
+<li>new promise本身是同步的；</li>
+<li>await阻塞后面的代码执行，因此跳出async函数执行下一个微任务（<u>实际上await是一个让出线程的标志。await后面的表达式会先执行一遍，将await后面的代码加入到microtask中，然后就会跳出整个async函数来执行后面的代码</u>）</li>
 </ul>
-<p><img src="/img/iview.png" alt="funnel"></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;  使用 npm</span><br><span class="line">$ npm install iview@1.0.1 --save</span><br><span class="line">&#x2F;&#x2F;  或使用 &lt;script&gt; 全局引用</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;iview.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="表格数据"><a href="#表格数据" class="headerlink" title="表格数据"></a>表格数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Table stripe :columns&#x3D;&quot;columns1&quot; :data&#x3D;&quot;list&quot;&gt;&lt;&#x2F;Table&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;block&quot; style&#x3D;&quot;text-align: center;margin: 20px auto;&quot;&gt;</span><br><span class="line">    &lt;Page :total&#x3D;&quot;total&quot; 		&#x2F;&#x2F; 分页</span><br><span class="line">      :page-size&#x3D;&quot;pageSize&quot; </span><br><span class="line">      @on-change&#x3D;&quot;changepage&quot; </span><br><span class="line">      show-total  </span><br><span class="line">      show-elevator </span><br><span class="line">      :current&#x3D;&quot;pageNum&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp;html部分由上，columns的title代表表头，key绑定接受后台传入字段名，数据部分绑定list，自动循环。<br>&ensp;&ensp;&ensp;&ensp;操作按钮需要手写，如其他字段一样；如数据无误，打印params会有相关行内数据，获取相关数据进行操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">	return&#123;</span><br><span class="line">		list: [],</span><br><span class="line">		columns1: [</span><br><span class="line">			&#123;</span><br><span class="line">                      title: &#39;缺工岗位类别&#39;,</span><br><span class="line">                      align:&quot;center&quot;,</span><br><span class="line">                      key: &#39;general&#39;,</span><br><span class="line">                      children:</span><br><span class="line">                          [</span><br><span class="line">                            &#123;</span><br><span class="line">                                title: &#39;普工&#39;,</span><br><span class="line">                                key: &#39;lackWorker&#39;,</span><br><span class="line">                                align: &#39;center&#39;,</span><br><span class="line"></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                title: &#39;技术&#39;,</span><br><span class="line">                                key: &#39;lackTechnician&#39;,</span><br><span class="line">                                align: &#39;center&#39;,</span><br><span class="line"></span><br><span class="line">                            &#125;,</span><br><span class="line">                              &#123;</span><br><span class="line">                                title: &#39;管理人员&#39;,</span><br><span class="line">                                key: &#39;lackManager&#39;,</span><br><span class="line">                                align: &#39;center&#39;,</span><br><span class="line">                                  width:110</span><br><span class="line"></span><br><span class="line">                            &#125;,</span><br><span class="line">                              &#123;</span><br><span class="line">                                title: &#39;其他&#39;,</span><br><span class="line">                                key: &#39;lackOther&#39;,</span><br><span class="line">                                align: &#39;center&#39;,</span><br><span class="line"></span><br><span class="line">                            &#125;</span><br><span class="line">                          ]</span><br><span class="line">                  &#125;,</span><br><span class="line">                  &#123;</span><br><span class="line">		        title: &#39;操作&#39;,</span><br><span class="line">		        key: &#39;other2&#39;,</span><br><span class="line">		        align: &#39;center&#39;,</span><br><span class="line">		          render: (h, params) &#x3D;&gt; &#123;</span><br><span class="line">		            return h(&quot;div&quot;, [</span><br><span class="line">		              h(</span><br><span class="line">		                &quot;Button&quot;,</span><br><span class="line">		                &#123;</span><br><span class="line">		                  props: &#123;</span><br><span class="line">		                    type: &quot;primary&quot;,</span><br><span class="line">		                    size: &quot;small&quot;</span><br><span class="line">		                  &#125;,</span><br><span class="line">		                  style: &#123;</span><br><span class="line">		                    marginRight: &quot;5px&quot;,</span><br><span class="line">		                    width:&quot;24px&quot;,</span><br><span class="line">		                    height:&quot;24px&quot;,</span><br><span class="line">		                    color:&quot;#ffffff&quot;,</span><br><span class="line">		                    backgroundColor:&quot;#12BD42&quot;,</span><br><span class="line">		                    backgroundRadius:&quot;4px&quot;,</span><br><span class="line">		                    borderRadius:&quot;4px&quot;</span><br><span class="line">		                  &#125;,</span><br><span class="line">		                  on: &#123;</span><br><span class="line">		                    click: () &#x3D;&gt; &#123;</span><br><span class="line">		                      this.modal2 &#x3D; true;</span><br><span class="line">		                      let id &#x3D; params.row.id</span><br><span class="line">		                      api.qi_planEditor(&#123;id: id&#125;).then((res) &#x3D;&gt; &#123;</span><br><span class="line">		                        this.formValidate2&#x3D; res.data;</span><br><span class="line">		                      &#125;)</span><br><span class="line">		                    &#125;</span><br><span class="line">		                  &#125;</span><br><span class="line">		                &#125;,</span><br><span class="line">		              )</span><br><span class="line">		            ]);</span><br><span class="line">		          &#125;</span><br><span class="line">  				&#125;</span><br><span class="line">              ]</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-<p>&ensp;&ensp;&ensp;&ensp;如需进行表格相关操作，如上 rander函数内进行。</p>
-<p>以下翻页，其他data、接口等方面同vue类似。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;页码</span><br><span class="line">   changepage(value) &#123;</span><br><span class="line">       let datas &#x3D; &#123;</span><br><span class="line">           pageNum: value,</span><br><span class="line">           pageSize: this.pageSize,</span><br><span class="line">       &#125;</span><br><span class="line">       api.qi_plan(datas).then(res&#x3D;&gt;&#123;</span><br><span class="line">           this.list &#x3D; res.data.list;</span><br><span class="line">       &#125;)</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">async function async1() &#123;</span><br><span class="line">    console.log(&#39;async1 start&#39;);</span><br><span class="line">    await async2();</span><br><span class="line">    console.log(&#39;async1 end&#39;);</span><br><span class="line">&#125;</span><br><span class="line">async function async2() &#123;</span><br><span class="line">	console.log(&#39;async2&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(&#39;script start&#39;);</span><br><span class="line"></span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&#39;setTimeout&#39;);</span><br><span class="line">&#125;, 0)</span><br><span class="line"></span><br><span class="line">async1();</span><br><span class="line"></span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&#39;promise1&#39;);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&#39;promise2&#39;);</span><br><span class="line">&#125;);</span><br><span class="line">console.log(&#39;script end&#39;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line">script start</span><br><span class="line">async1 start</span><br><span class="line">async2</span><br><span class="line">promise1</span><br><span class="line">script end</span><br><span class="line">async1 end</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
 
     </div>
     <div>
@@ -333,7 +330,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/iview/" rel="tag"><i class="fa fa-tag"></i> iview</a>
+              <a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" rel="tag"><i class="fa fa-tag"></i> 事件循环</a>
           </div>
 
         
@@ -342,13 +339,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/08/12/echarts%E7%82%B9%E5%87%BB%E5%88%87%E6%8D%A2%E8%B7%AF%E7%94%B1/" rel="prev" title="echarts点击切换路由">
-      <i class="fa fa-chevron-left"></i> echarts点击切换路由
+    <a href="/2021/10/18/broadcast%E5%92%8Cdispatch/" rel="prev" title="vue之派发与广播-dispatch与broadcast">
+      <i class="fa fa-chevron-left"></i> vue之派发与广播-dispatch与broadcast
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/11/15/set_cookie/" rel="next" title="页面缓存">
-      页面缓存 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -408,7 +402,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格数据"><span class="nav-number">2.</span> <span class="nav-text">表格数据</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#任务队列-Event-Queue"><span class="nav-number">1.</span> <span class="nav-text">任务队列( Event Queue )</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件循环"><span class="nav-number">2.</span> <span class="nav-text">事件循环</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
