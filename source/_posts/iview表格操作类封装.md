@@ -14,16 +14,16 @@ tags:
 &ensp;&ensp;&ensp;&ensp;以下是针对操作按钮的，比如需要在table中显示编辑、删除等。
 
 #### table显示
-![funnel](/img/iview_table.jpg)
+![funnel](/img/iview_table/iview_table.jpg)
 
 #### 初始加载
 就按钮而言，可定义多个函数（可传递多个参数，实际根据自己所需）
-![funnel](/img/iview_table2.jpg)
+![funnel](/img/iview_table/iview_table2.jpg)
 #### 点击按钮
 点击按钮时传递相关参数，打开所需要编辑的modal。
-![funnel](/img/iview_table3.jpg)
+![funnel](/img/iview_table/iview_table3.jpg)
 回过头来看，此时的columns中我们只需要这么写，在data中就不会有过多的复杂代码：
-![funnel](/img/iview_table4.jpg)
+![funnel](/img/iview_table/iview_table4.jpg)
 
 
 

@@ -42,4 +42,4 @@ tags: cookie
 &ensp;&ensp;&ensp;&ensp;sessionStorage用于本地存储一个会话（session）中的数据，这些数据只有在同一个会话中的页面才能访问,并且当会话结束后数据也随之销毁。因此sessionStorage不是一种持久化的本地存储，仅是会话级别的存储。只允许同一窗口访问。用法同localStorage。
 
 ## 三者异同：
-![funnel](/img/storage.png)
+![funnel](/img/storage/storage.png)

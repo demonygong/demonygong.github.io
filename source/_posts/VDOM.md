@@ -2,6 +2,9 @@
 title: 'VDOM'
 date: 2022-04-07 10:13:18
 categories:
+- Vue
+- VDOM
+tags:
 - VDOM
 ---
 
